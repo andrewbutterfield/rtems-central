@@ -1,4 +1,22 @@
-This tool can generate and remove RTEMS test files from a Promela model
+testbuilder - manages the generation of test files from a Promela model
+
+Usage:   testbuilder <command> [<modelname>]
+    clean <model>    Removes generated files.
+    spin <model>     Runs SPIN to find all scenarios. The scenarios are found 
+                     in numbered files called <model>N.spn 
+    gentests <model> Convert SPIN scenarios to test sources. 
+                     Each <model>N.spn produces a numbered test source file.
+    copy <model>     Copies the generated test files to the relevant test
+                     source directory, and updates the relevant test
+                     configuration files
+    archive <model>  Copies generated spn, trail, source, and test log files to
+                     an archive sub-directory of the model directory.
+    compile          Rebuilds the test executable
+    run              Runs tests in a simulator
+    all <model>      Does clean, spin, gentests, copy, compile, and run
+    zero             Removes all generated test filenames from the test 
+                     configuration files, but does NOT remove the test sources
+                     from the test source directory
 
 In order to generate test files the following input files are required:
     `<model>.pml`
@@ -6,18 +24,9 @@ In order to generate test files the following input files are required:
     `<model>-pre.h`
     `<model>-post.h`
     `<model>-run.h`
-where `<model>` is the name of the model.
+where `<model>` is the name of the model. In addition there may be other files
+whose names have <model> embedded in them. These are included in what is 
+transfered to the test source directory by the copy command.
 
-`all <model>` will run clean, spin, gentests, copy, compile and run
-`spin <model>` will run SPIN to find all scenarios
-`gentests <model>` will produce C tests
-`clean <model>` will remove generated files.
-`copy <model>`
-   - copies the generated  C files to the relevant RTEMS test source directory
-   - updates the relevant RTEMS configuration yaml file
-`archive <model>`` will copy generated spn, trail, C, and test log files
-   to the archive sub-directory of the current model directory.
-`compile` rebuilds the RTEMS test executable
-`run` runs the tests in the SIS simulator
-`zero` removes all generated C filenames from the RTEMS configuration yaml file
-  - it does NOT remove the test sources from the RTEMS test source directory
+
+

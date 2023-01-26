@@ -253,10 +253,8 @@ def main():
             or len(sys.argv) == 3 and sys.argv[1] == "copy"
             or len(sys.argv) == 2 and sys.argv[1] == "compile"
             or len(sys.argv) == 2 and sys.argv[1] == "run"):
-        print("USAGE:")
+        print("USAGE: <command> [<modelname>]")
         print("help - more details about usage and commands below")
-        print("all modelname - runs clean, spin, gentests, copy, compile and "
-              "run")
         print("clean modelname - remove spin, test files")
         print("archive modelname - archives spin, test files")
         print("zero  - remove all tesfiles from RTEMS")
@@ -265,6 +263,7 @@ def main():
         print("copy modelname - copy test files and configuration to RTEMS")
         print("compile - compiles RTEMS tests")
         print("run - runs RTEMS tests")
+        print("all modelname - does clean; spin; gentests; copy; compile; run")
         sys.exit(1)
 
     source_dir = os.path.dirname(os.path.realpath(__file__))
